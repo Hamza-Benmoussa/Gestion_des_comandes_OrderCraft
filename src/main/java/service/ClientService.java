@@ -1,4 +1,6 @@
 package service;
 
-public class ClientService {
+import service.impl.ClientServiceImpl;
+
+public class ClientService implements ClientServiceImpl {
 }
