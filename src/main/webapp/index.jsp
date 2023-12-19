@@ -39,7 +39,7 @@
                 <a class="nav-link" href="#">Gestion Commande</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Gestion Stock</a>
+                <a class="nav-link" href="ControleurServletProduit">Gestion Stock</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Logout">Logout</a>

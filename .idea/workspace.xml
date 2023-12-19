@@ -19,8 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -130,7 +130,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702930777738</updated>
       <workItem from="1702930779148" duration="5018000" />
-      <workItem from="1702973968471" duration="10017000" />
+      <workItem from="1702973968471" duration="19604000" />
     </task>
     <task id="LOCAL-00001" summary="create class">
       <option name="closed" value="true" />
