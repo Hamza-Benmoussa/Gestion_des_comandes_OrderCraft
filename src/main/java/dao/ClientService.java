@@ -1,6 +1,6 @@
-package service;
+package dao;
 
-import service.impl.ClientServiceImpl;
+import dao.impl.ClientServiceImpl;
 
 public class ClientService implements ClientServiceImpl {
 }

@@ -1,4 +1,4 @@
-package service.impl;
+package dao.impl;
 
 public interface ProduitServiceImpl {
 }
