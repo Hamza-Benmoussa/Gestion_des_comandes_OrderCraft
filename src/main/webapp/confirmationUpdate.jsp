@@ -7,7 +7,7 @@
 <body>
 <%@ include file="headerGestionProduit.jsp"%>
 <div class="container mt-3">
-    <h2>Produit add avec succes</h2>
+    <h2>Produit update avec succes</h2>
 </div>
 </body>
 </html>

@@ -80,6 +80,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\css" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\produit" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.17" ALTERNATIVE_JRE_ENABLED="false">
@@ -132,7 +135,8 @@
       <workItem from="1702930779148" duration="5018000" />
       <workItem from="1702973968471" duration="20053000" />
       <workItem from="1703012513364" duration="12454000" />
-      <workItem from="1703059162822" duration="18488000" />
+      <workItem from="1703059162822" duration="20785000" />
+      <workItem from="1703095879768" duration="3748000" />
     </task>
     <task id="LOCAL-00001" summary="create class">
       <option name="closed" value="true" />
@@ -166,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703073659825</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="complete CRUD produit">
+      <option name="closed" value="true" />
+      <created>1703087631919</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703087631920</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +188,7 @@
     <MESSAGE value="create class" />
     <MESSAGE value="gere la class produit avec jsp et servelet et interface aussi implemtation il rest l'affichage" />
     <MESSAGE value="complete produit rest just update et debut pour class client" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete produit rest just update et debut pour class client" />
+    <MESSAGE value="complete CRUD produit" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete CRUD produit" />
   </component>
 </project>

@@ -13,6 +13,9 @@ public class Client {
         this.email = email;
     }
 
+    public Client() {
+    }
+
     // Example constructor with id (for retrieving from the database)
     public Client(int id, String name, String address, String email) {
         this.id = id;

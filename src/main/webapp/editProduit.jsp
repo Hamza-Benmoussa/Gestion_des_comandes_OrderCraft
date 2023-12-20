@@ -13,7 +13,7 @@
             <h5 class="card-title">Update Produit</h5>
         </div>
         <div class="card-body">
-            <form action="addProduit.do" method="post">
+            <form action="updateProduit.do" method="post">
                 <div class="form-group">
                     <label for="nom">ID:</label>
                     <input type="text" class="form-control" id="id" name="id" value="${produit.id}" required>
