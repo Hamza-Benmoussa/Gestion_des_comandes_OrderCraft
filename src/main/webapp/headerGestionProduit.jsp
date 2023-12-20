@@ -16,12 +16,6 @@
                 <a class="nav-link" href="chercher.do">Search Produit</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="delete.do">Delete Produit</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="update.do">Update Produit</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="Logout">Logout</a>
             </li>
         </ul>

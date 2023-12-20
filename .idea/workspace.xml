@@ -132,7 +132,7 @@
       <workItem from="1702930779148" duration="5018000" />
       <workItem from="1702973968471" duration="20053000" />
       <workItem from="1703012513364" duration="12454000" />
-      <workItem from="1703059162822" duration="13380000" />
+      <workItem from="1703059162822" duration="18488000" />
     </task>
     <task id="LOCAL-00001" summary="create class">
       <option name="closed" value="true" />
@@ -158,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703001167494</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="complete produit rest just update et debut pour class client">
+      <option name="closed" value="true" />
+      <created>1703073659824</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703073659825</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +175,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create class" />
     <MESSAGE value="gere la class produit avec jsp et servelet et interface aussi implemtation il rest l'affichage" />
-    <option name="LAST_COMMIT_MESSAGE" value="gere la class produit avec jsp et servelet et interface aussi implemtation il rest l'affichage" />
+    <MESSAGE value="complete produit rest just update et debut pour class client" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete produit rest just update et debut pour class client" />
   </component>
 </project>
