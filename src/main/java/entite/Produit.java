@@ -5,17 +5,16 @@ import java.io.Serializable;
 public class Produit implements Serializable {
     private int id;
     private String name;
-    private int quantityInStock;
     private int prix;
+    private int quantite;
 
     public Produit() {
     }
 
-    public Produit(int id, String name, int quantityInStock, int prix) {
-        this.id = id;
+    public Produit(String name, int prix,int quantite) {
         this.name = name;
-        this.quantityInStock = quantityInStock;
         this.prix = prix;
+        this.quantite=quantite;
     }
 
     public int getId() {
@@ -34,13 +33,6 @@ public class Produit implements Serializable {
         this.name = name;
     }
 
-    public int getQuantityInStock() {
-        return quantityInStock;
-    }
-
-    public void setQuantityInStock(int quantityInStock) {
-        this.quantityInStock = quantityInStock;
-    }
 
     public int getPrix() {
         return prix;
@@ -48,5 +40,13 @@ public class Produit implements Serializable {
 
     public void setPrix(int prix) {
         this.prix = prix;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 }
