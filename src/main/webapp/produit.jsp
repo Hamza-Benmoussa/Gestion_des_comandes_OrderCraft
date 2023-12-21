@@ -35,24 +35,24 @@
                 <tbody>
                 <c:forEach items="${model.produits}" var="p">
 
-                        <tr>
-                            <td>${p.id}</td>
-                            <td>${p.name}</td>
-                            <td>${p.prix}</td>
-                            <td>${p.quantite}</td>
-                            <!-- Delete Button -->
-                            <td>
-                                <form action="delete.do" method="post" style="display: inline;">
-                                    <input type="hidden" name="id" value="${p.id}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            </td>
+                    <tr>
+                        <td>${p.id}</td>
+                        <td>${p.name}</td>
+                        <td>${p.prix}</td>
+                        <td>${p.quantite}</td>
+                        <!-- Delete Button -->
+                        <td>
+                            <form action="delete.do" method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="${p.id}">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
 
-                            <!-- Edit Button -->
-                            <td>
-                                <a href="update.do?id=${p.id}" class="btn btn-primary btn-sm">Edit</a>
-                            </td>
-                        </tr>
+                        <!-- Edit Button -->
+                        <td>
+                            <a href="update.do?id=${p.id}" class="btn btn-primary btn-sm">Edit</a>
+                        </td>
+                    </tr>
                 </c:forEach>
 
                 </tbody>

@@ -17,9 +17,10 @@ public class ClientImplDao implements IClientDao {
     public Client addClient(Client client) {
         Connection connection = DbConnector.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO client (clientName, email) VALUES (?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO client (clientName, clientEmail, clientAddress) VALUES (?, ?, ?)");
             ps.setString(1, client.getName());
             ps.setString(2, client.getEmail());
+            ps.setString(3, client.getAddress());
             ps.executeUpdate();
 
             PreparedStatement ps2 = connection.prepareStatement("SELECT MAX(clientId) AS MAX_clientId FROM client");
@@ -46,7 +47,8 @@ public class ClientImplDao implements IClientDao {
                 Client client = new Client();
                 client.setId(rs.getInt("clientId"));
                 client.setName(rs.getString("clientName"));
-                client.setEmail(rs.getString("email"));
+                client.setEmail(rs.getString("clientEmail"));
+                client.setAddress(rs.getString("clientAddress"));
                 clients.add(client);
             }
         } catch (SQLException e) {
@@ -67,7 +69,8 @@ public class ClientImplDao implements IClientDao {
                 client = new Client();
                 client.setId(rs.getInt("clientId"));
                 client.setName(rs.getString("clientName"));
-                client.setEmail(rs.getString("email"));
+                client.setEmail(rs.getString("clientEmail"));
+                client.setAddress(rs.getString("clientAddress"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,10 +82,11 @@ public class ClientImplDao implements IClientDao {
     public Client updateClient(Client client) {
         Connection connection = DbConnector.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE client SET clientName=?, email=? WHERE clientId=?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE client SET clientName=?, clientEmail=? , clientAddress=? WHERE clientId=?");
             ps.setString(1, client.getName());
             ps.setString(2, client.getEmail());
-            ps.setInt(3, client.getId());
+            ps.setString(3,client.getAddress());
+            ps.setInt(4, client.getId());
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
                 return client;
@@ -116,7 +120,8 @@ public class ClientImplDao implements IClientDao {
                 Client client = new Client();
                 client.setId(rs.getInt("clientId"));
                 client.setName(rs.getString("clientName"));
-                client.setEmail(rs.getString("email"));
+                client.setEmail(rs.getString("clientEmail"));
+                client.setAddress(rs.getString("clientAddress"));
                 clients.add(client);
             }
         } catch (SQLException e) {

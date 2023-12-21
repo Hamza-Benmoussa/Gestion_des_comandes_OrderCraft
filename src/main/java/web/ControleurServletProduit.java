@@ -47,7 +47,7 @@ public class ControleurServletProduit extends HttpServlet {
             Produit p = metier.addProduit(new Produit(name, prix,quantite));
 
             req.setAttribute("produit", p);
-            req.getRequestDispatcher("confirmation.jsp").forward(req, resp);
+            req.getRequestDispatcher("confirmationP.jsp").forward(req, resp);
         } else if (path.equals("/delete.do")) {
             int id = Integer.parseInt(req.getParameter("id"));
             metier.deleteProduit(id);
@@ -59,18 +59,18 @@ public class ControleurServletProduit extends HttpServlet {
             req.setAttribute("produit",p);
             req.getRequestDispatcher("editProduit.jsp").forward(req,resp);
         } else if (path.equals("/updateProduit.do") && (req.getMethod().equals("POST"))) {
-        int id = Integer.parseInt(req.getParameter("id"));
-        String name = req.getParameter("name");
-        int prix = Integer.parseInt(req.getParameter("prix"));
-        int quantite = Integer.parseInt(req.getParameter("quantite"));
-        Produit p = new Produit(name, prix, quantite);
-        p.setId(id);
-        metier.updateProduit(p);
-        req.setAttribute("produit", p);
-        req.getRequestDispatcher("confirmationUpdate.jsp").forward(req, resp);
-    }
+            int id = Integer.parseInt(req.getParameter("id"));
+            String name = req.getParameter("name");
+            int prix = Integer.parseInt(req.getParameter("prix"));
+            int quantite = Integer.parseInt(req.getParameter("quantite"));
+            Produit p = new Produit(name, prix, quantite);
+            p.setId(id);
+            metier.updateProduit(p);
+            req.setAttribute("produit", p);
+            req.getRequestDispatcher("confirmationUpdateP.jsp").forward(req, resp);
+        }
 
-}
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req,resp);

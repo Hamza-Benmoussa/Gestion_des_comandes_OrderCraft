@@ -10,7 +10,7 @@
                 <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Gestion Client</a>
+                <a class="nav-link" href="chercher.client">Gestion Client</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="chercher.do">Gestion Produit</a>
