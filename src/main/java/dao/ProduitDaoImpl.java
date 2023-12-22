@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProduitDaoImpl implements IProduitDao {
@@ -128,5 +129,34 @@ public class ProduitDaoImpl implements IProduitDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public List<Produit> getProduitsByIds(List<Integer> ids) {
+        List<Produit> produits = new ArrayList<>();
+        Connection connection = DbConnector.getConnection();
+        try {
+            // Use the provided list of ids to fetch products
+            // Note: This is a basic example; you might need to adjust the SQL query based on your database schema
+            String sql = "SELECT * FROM produit WHERE produitId IN (" + String.join(",", Collections.nCopies(ids.size(), "?")) + ")";
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            // Set the values for the placeholders in the SQL query
+            for (int i = 0; i < ids.size(); i++) {
+                ps.setInt(i + 1, ids.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Produit p = new Produit();
+                p.setId(rs.getInt("produitId"));
+                p.setName(rs.getString("produitName"));
+                p.setPrix(rs.getInt("prix"));
+                p.setQuantite(rs.getInt("quantite"));
+                produits.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produits;
     }
 }

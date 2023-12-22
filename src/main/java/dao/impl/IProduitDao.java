@@ -5,10 +5,17 @@ import entite.Produit;
 import java.util.List;
 
 public interface IProduitDao {
-    public Produit addProduit(Produit p);
-    public List<Produit> produitMotCle(String mc);
-    public Produit getProduit(int id);
-    public Produit updateProduit(Produit p);
-    public  void deleteProduit(int id);
-    public List<Produit> getAllProduits();
+    Produit addProduit(Produit produit);
+
+    List<Produit> getAllProduits();
+
+    Produit getProduit(int id);
+
+    List<Produit> getProduitsByIds(List<Integer> ids);  // Add this method
+
+    Produit updateProduit(Produit produit);
+
+    void deleteProduit(int id);
+    List<Produit> produitMotCle(String mc);
+
 }

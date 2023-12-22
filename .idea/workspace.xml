@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Gestion_des_comandes_OrderCraft" />
+      <artifact name="Gestion_des_comandes_OrderCraft:war" />
+      <artifact name="Gestion_des_comandes_OrderCraft:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -19,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Enum" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -43,7 +44,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -94,13 +95,13 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" editBeforeRun="true" APPLICATION_SERVER_NAME="Tomcat 10.1.17" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="19" nameIsGenerated="true">
-      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="Gestion_des_comandes_OrderCraft">
+        <artifact name="Gestion_des_comandes_OrderCraft:war">
           <settings>
-            <option name="CONTEXT_PATH" value="" />
+            <option name="CONTEXT_PATH" value="/Gestion_des_comandes_OrderCraft_war" />
           </settings>
         </artifact>
       </deployment>
@@ -178,7 +179,8 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="Gestion_des_comandes_OrderCraft" />
+          <artifact name="Gestion_des_comandes_OrderCraft:war" />
+          <artifact name="Gestion_des_comandes_OrderCraft:war exploded" />
         </option>
       </method>
     </configuration>
@@ -202,7 +204,10 @@
       <workItem from="1703103335880" duration="344000" />
       <workItem from="1703103765220" duration="2353000" />
       <workItem from="1703107728436" duration="1849000" />
-      <workItem from="1703148603237" duration="9622000" />
+      <workItem from="1703148603237" duration="13779000" />
+      <workItem from="1703184829735" duration="3039000" />
+      <workItem from="1703233303037" duration="15098000" />
+      <workItem from="1703255104247" duration="600000" />
     </task>
     <task id="LOCAL-00001" summary="create class">
       <option name="closed" value="true" />

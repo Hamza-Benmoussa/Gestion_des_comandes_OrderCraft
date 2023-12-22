@@ -16,7 +16,7 @@
                 <a class="nav-link" href="chercher.do">Gestion Produit</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Gestion Commande</a>
+                <a class="nav-link" href="chercher.com">Gestion Commande</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Logout">Logout</a>
