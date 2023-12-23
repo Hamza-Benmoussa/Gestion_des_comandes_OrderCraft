@@ -61,6 +61,12 @@ L'application utilise une connexion à la base de données gérée par la classe
 2. Configurer la connexion à la base de données dans `DbConnector.java`.
 3. Déployer l'application sur un serveur compatible Jakarta EE (Tomcat).
 4. Utiliser la commande git.
+
+## UML Diagramme 
+*-Use case :
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/b22bd21b-437e-4ee2-93dc-bb59a566b723)
+
+
 ## L'interface de l'app
 *Login de l'app
 
