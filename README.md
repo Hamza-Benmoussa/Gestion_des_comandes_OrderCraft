@@ -96,7 +96,7 @@ L'application utilise une connexion à la base de données gérée par la classe
 
 *mettre a jour le client
 
-![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/51fbbf1e-e65b-41fe-8ca1-9b8869a9a48c)
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/d3943c54-e5bb-49d5-9d6c-5b1ff060cfce)
 
 *suppresion de le client 
 
