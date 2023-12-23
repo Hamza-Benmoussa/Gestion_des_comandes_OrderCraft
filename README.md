@@ -76,7 +76,7 @@ L'application utilise une connexion à la base de données gérée par la classe
 
 *afficher de client
 
-![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/ba3caadd-043e-4a6a-8509-89be77e13afb)
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/1a684bb8-39a7-41cd-97ad-eddde834b7fd)
 
 *ajouter client
 
