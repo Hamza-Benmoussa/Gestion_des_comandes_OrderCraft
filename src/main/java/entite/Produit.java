@@ -2,7 +2,7 @@ package entite;
 
 import java.io.Serializable;
 
-public class Produit implements Serializable {
+public class Produit {
     private int id;
     private String name;
     private int prix;

@@ -3,80 +3,112 @@ package dao;
 import DBconnection.DbConnector;
 import dao.impl.ICommandeDao;
 import entite.Commande;
-import entite.CommandeProduit;
 import entite.Produit;
 import entite.Status;
+import jakarta.servlet.http.HttpServletRequest;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static DBconnection.DbConnector.connection;
 
 public class CommandeImplDao implements ICommandeDao {
 
     @Override
-    public Commande addCommande(Commande commande) {
+    public Commande addCommande(Commande commande, HttpServletRequest request) {
         Connection connection = DbConnector.getConnection();
         try {
             if (!clientExists(commande.getIdClient())) {
                 throw new RuntimeException("Le client avec l'ID " + commande.getIdClient() + " n'existe pas.");
             }
 
-            for (Integer produitId : commande.getProduitsIds()) {
+            for (Produit produitId : commande.getProduitsIds()) {
                 if (!produitExists(produitId)) {
-                    throw new RuntimeException("Le produit avec l'ID " + produitId + " n'existe pas.");
+                    throw new RuntimeException("Le produit avec l'ID " + produitId.getId() + " n'existe pas.");
                 }
             }
 
-            try (PreparedStatement ps = connection.prepareStatement("INSERT INTO commande (clientId, commandeDate, commandeStatus) VALUES (?, ?, ?)")) {
+            // Begin a transaction
+            try (PreparedStatement ps = connection.prepareStatement("INSERT INTO commande (clientId, commandeDate, commandeStatus) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, commande.getIdClient());
-                ps.setDate(2, java.sql.Date.valueOf(commande.getDateCommande()));
+                ps.setDate(2, Date.valueOf(commande.getDateCommande()));
                 ps.setString(3, commande.getStatus().toString());
                 ps.executeUpdate();
-            }
 
-
-            try (PreparedStatement ps2 = connection.prepareStatement("SELECT LAST_INSERT_ID() AS last_id");
-                 ResultSet rs = ps2.executeQuery()) {
-                if (rs.next()) {
-                    int generatedId = rs.getInt("last_id");
-                    commande.setIdCommande(generatedId);
-                    updateProductQuantities(commande);
+                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        commande.setIdCommande(generatedKeys.getInt(1));
+                    } else {
+                        throw new SQLException("La création de la commande a échoué, aucun ID obtenu.");
+                    }
                 }
             }
+
+            // Insert into commande_produit table
+            try (PreparedStatement ps2 = connection.prepareStatement("INSERT INTO commande_produit (id_commande, id_produit, quantite, prix_total) VALUES (?, ?, ?, ?)")) {
+                for (Produit produitId : commande.getProduitsIds()) {
+                    Produit produit = getProduit(produitId);
+                    ps2.setInt(1, commande.getIdCommande());
+                    ps2.setInt(2, produit.getId());
+                    ps2.setInt(3, 1);  // Assuming a quantity of 1, modify as needed
+                    ps2.setDouble(4, produit.getPrix());
+                    ps2.addBatch();
+
+                }
+                // Execute batch insert
+                ps2.executeBatch();
+            }
+
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            // Rollback the transaction in case of an exception
+            e.printStackTrace();
         }
+
         return commande;
     }
 
-    private boolean clientExists(int clientId) throws SQLException {
-        Connection connection = DbConnector.getConnection();
-        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM client WHERE clientId = ?")) {
-            ps.setInt(1, clientId);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+    public void updateProductQuantities(List<Produit> produits, HttpServletRequest request) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(
+                "UPDATE produit SET quantite = quantite - ? WHERE produitId = ?")) {
+            for (Produit produit : produits) {
+                // Utilisation de la nouvelle méthode pour obtenir la quantité
+                int quantity = produit.getQuantite();
+
+                ps.setInt(1, quantity);
+                ps.setInt(2, produit.getId());
+                ps.addBatch();
             }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            ps.executeBatch();
         }
-        return false;
     }
 
-    private boolean produitExists(int produitId) throws SQLException {
-        Connection connection = DbConnector.getConnection();
-        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM produit WHERE produitId = ?")) {
-            ps.setInt(1, produitId);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+    public int getQuantityFromUserInput(Produit produit, HttpServletRequest request) {
+        // Obtenez la quantité à partir des paramètres de la requête
+        String paramName = "quantity_" + produit.getId(); // Utilisez un nom de paramètre unique pour chaque produit
+        String quantityParam = request.getParameter(paramName);
+
+        // Vérifiez si le paramètre est présent et non vide
+        if (quantityParam != null && !quantityParam.isEmpty()) {
+            try {
+                // Essayez de convertir la chaîne en un entier
+                int quantity = Integer.parseInt(quantityParam);
+
+                // Assurez-vous que la quantité est positive
+                if (quantity > 0) {
+                    return quantity;
+                }
+            } catch (NumberFormatException e) {
+                // Gérez l'exception si la conversion échoue
+                e.printStackTrace(); // Vous pouvez loguer l'erreur ou prendre d'autres mesures nécessaires
             }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
         }
-        return false;
+
+        // Retournez une valeur par défaut si la quantité n'a pas pu être obtenue
+        return 1; // Valeur par défaut
     }
+
 
     @Override
     public List<Commande> clientCommande(String mc) {
@@ -91,11 +123,15 @@ public class CommandeImplDao implements ICommandeDao {
                     command.setIdClient(rs.getInt("clientId"));
                     command.setDateCommande(rs.getDate("commandeDate").toLocalDate());
                     command.setStatus(Status.valueOf(rs.getString("commandeStatus")));
+
+                    // Retrieve and set the products for each command
+                    command.setProduitsIds(getProduitsForCommande(command.getIdCommande()));
+
                     commands.add(command);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            throw new RuntimeException("Erreur lors de la récupération des commandes client.", e);
         }
         return commands;
     }
@@ -113,29 +149,16 @@ public class CommandeImplDao implements ICommandeDao {
                     command.setIdClient(rs.getInt("clientId"));
                     command.setDateCommande(rs.getDate("commandeDate").toLocalDate());
                     command.setStatus(Status.valueOf(rs.getString("commandeStatus")));
+
+                    // Retrieve and set the products for the command
+                    command.setProduitsIds(getProduitsForCommande(command.getIdCommande()));
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            throw new RuntimeException("Erreur lors de la récupération de la commande par ID.", e);
         }
         return command;
     }
-
-    @Override
-    public Commande updateCommande(Commande commande) {
-        Connection connection = DbConnector.getConnection();
-        try (PreparedStatement ps = connection.prepareStatement("UPDATE commande SET commandeStatus=? WHERE commandeId=?")) {
-            ps.setString(1, commande.getStatus().toString());
-            ps.setInt(2, commande.getIdCommande());
-            ps.executeUpdate();
-
-            updateProductQuantities(commande);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return commande;
-    }
-
 
     @Override
     public void deleteCommande(int id) {
@@ -144,7 +167,7 @@ public class CommandeImplDao implements ICommandeDao {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            throw new RuntimeException("Erreur lors de la suppression de la commande.", e);
         }
     }
 
@@ -159,73 +182,76 @@ public class CommandeImplDao implements ICommandeDao {
                 command.setIdCommande(rs.getInt("commandeId"));
                 command.setIdClient(rs.getInt("clientId"));
                 command.setDateCommande(rs.getDate("commandeDate").toLocalDate());
-                command.setStatus(Status.valueOf(rs.getString("commandeStaus")));
+
+                // Print or log the actual value retrieved from the database
+                String statusValue = rs.getString("commandeStatus");
+                System.out.println("Status value from database: " + statusValue);
+
+                command.setStatus(Status.fromString(statusValue));
+
+                // Retrieve and set the products for each command
+                command.setProduitsIds(getProduitsForCommande(command.getIdCommande()));
+
                 commands.add(command);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            throw new RuntimeException("Erreur lors de la récupération de toutes les commandes.", e);
         }
         return commands;
     }
 
-    private void updateProductQuantities(Commande commande) throws SQLException {
+
+    private List<Produit> getProduitsForCommande(int commandeId) throws SQLException {
+        List<Produit> produits = new ArrayList<>();
         Connection connection = DbConnector.getConnection();
-
-        try {
-            List<CommandeProduit> commandProducts = getCommandeProduits(commande.getIdCommande());
-
-            for (CommandeProduit commandProduit : commandProducts) {
-                Produit produit = getProduit(commandProduit.getIdProduit());
-
-                if (commande.getStatus() == Status.TERMINER) {
-                    try (PreparedStatement ps = connection.prepareStatement("UPDATE produit SET quantite = quantite - ? WHERE produitId = ?")) {
-                        ps.setInt(1, commandProduit.getQuantite());
-                        ps.setInt(2, commandProduit.getIdProduit());
-                        ps.executeUpdate();
-                    }
-                } else if (commande.getStatus() == Status.ANULLER) {
-                    try (PreparedStatement ps = connection.prepareStatement("UPDATE produit SET quantite = quantite + ? WHERE produitId = ?")) {
-                        ps.setInt(1, commandProduit.getQuantite());
-                        ps.setInt(2, commandProduit.getIdProduit());
-                        ps.executeUpdate();
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private List<CommandeProduit> getCommandeProduits(int idCommande) throws SQLException {
-        Connection connection = DbConnector.getConnection();
-        List<CommandeProduit> commandProduits = new ArrayList<>();
-
-        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM commande_produit WHERE id_commande = ?")) {
-            ps.setInt(1, idCommande);
+        try (PreparedStatement ps = connection.prepareStatement("SELECT produit.* FROM produit " +
+                "INNER JOIN commande_produit ON produit.produitId = commande_produit.id_produit " +
+                "WHERE commande_produit.id_commande = ?")) {
+            ps.setInt(1, commandeId);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    CommandeProduit commandeProduit = new CommandeProduit();
-                    commandeProduit.setId(rs.getInt("id"));
-                    commandeProduit.setIdProduit(rs.getInt("id_produit"));
-                    commandeProduit.setIdCommande(rs.getInt("id_commande"));
-                    commandeProduit.setQuantite(rs.getInt("quantite"));
-                    commandeProduit.setPrixTotal(rs.getDouble("prix_total"));
-                    commandProduits.add(commandeProduit);
+                    Produit produit = new Produit();
+                    produit.setId(rs.getInt("produitId"));
+                    produit.setName(rs.getString("produitName"));
+                    produit.setPrix(rs.getInt("prix"));
+                    produit.setQuantite(rs.getInt("quantite"));
+                    produits.add(produit);
                 }
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-
-        return commandProduits;
+        return produits;
     }
 
-    private Produit getProduit(int idProduit) throws SQLException {
+    private boolean clientExists(int clientId) throws SQLException {
+        Connection connection = DbConnector.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM client WHERE clientId = ?")) {
+            ps.setInt(1, clientId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification de l'existence du client.", e);
+        }
+    }
+
+    private boolean produitExists(Produit produit) throws SQLException {
+        Connection connection = DbConnector.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM produit WHERE produitId = ?")) {
+            ps.setInt(1, produit.getId());
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification de l'existence du produit.", e);
+        }
+    }
+
+    private Produit getProduit(Produit idProduit) throws SQLException {
         Connection connection = DbConnector.getConnection();
         Produit produit = null;
 
         try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM produit WHERE produitId = ?")) {
-            ps.setInt(1, idProduit);
+            ps.setInt(1, idProduit.getId());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     produit = new Produit();
@@ -236,7 +262,7 @@ public class CommandeImplDao implements ICommandeDao {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erreur lors de la récupération du produit.", e);
         }
 
         return produit;

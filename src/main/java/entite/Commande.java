@@ -9,13 +9,13 @@ public class Commande {
     private int idClient;
     private LocalDate dateCommande;
     private Status status;
-    private List<Integer> produitsIds; // Change the type to a list of product IDs
+    private List<Produit> produitsIds; // Change the type to a list of product IDs
 
     public Commande() {
     }
 
     // Constructor that accepts necessary parameters
-    public Commande(int idClient, LocalDate dateCommande, List<Integer> produitsIds, Status status) {
+    public Commande(int idClient, LocalDate dateCommande, List<Produit> produitsIds, Status status) {
         this.idClient = idClient;
         this.dateCommande = dateCommande;
         this.status = status;
@@ -54,11 +54,12 @@ public class Commande {
         this.status = status;
     }
 
-    public List<Integer> getProduitsIds() {
+    public List<Produit> getProduitsIds() {
         return produitsIds;
     }
 
-    public void setProduitsIds(List<Integer> produitsIds) {
+    public void setProduitsIds(List<Produit> produitsIds) {
         this.produitsIds = produitsIds;
     }
+
 }

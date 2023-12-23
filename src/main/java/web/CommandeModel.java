@@ -8,12 +8,6 @@ public class CommandeModel {
     private String motCle;
     private List<Commande> commandes;
 
-    // Constructors, getters, and setters
-
-    public CommandeModel() {
-        // Default constructor
-    }
-
     public String getMotCle() {
         return motCle;
     }

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Gestion_des_comandes_OrderCraft:war" />
       <artifact name="Gestion_des_comandes_OrderCraft:war exploded" />
     </artifacts-to-build>
   </component>
@@ -21,8 +20,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -90,18 +89,20 @@
       <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp" />
+      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\WEB-INF" />
       <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\produit" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" editBeforeRun="true" APPLICATION_SERVER_NAME="Tomcat 10.1.17" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="19" nameIsGenerated="true">
-      <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="Gestion_des_comandes_OrderCraft:war">
+        <artifact name="Gestion_des_comandes_OrderCraft:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/Gestion_des_comandes_OrderCraft_war" />
+            <option name="CONTEXT_PATH" value="/Gestion_des_comandes_OrderCraft_war_exploded" />
           </settings>
         </artifact>
       </deployment>
@@ -177,9 +178,7 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <method v="2">
-        <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="Gestion_des_comandes_OrderCraft:war" />
           <artifact name="Gestion_des_comandes_OrderCraft:war exploded" />
         </option>
       </method>
@@ -207,7 +206,12 @@
       <workItem from="1703148603237" duration="13779000" />
       <workItem from="1703184829735" duration="3039000" />
       <workItem from="1703233303037" duration="15098000" />
-      <workItem from="1703255104247" duration="600000" />
+      <workItem from="1703255104247" duration="4101000" />
+      <workItem from="1703271599192" duration="4233000" />
+      <workItem from="1703275852412" duration="5197000" />
+      <workItem from="1703281399192" duration="4162000" />
+      <workItem from="1703318623150" duration="4831000" />
+      <workItem from="1703323541001" duration="9072000" />
     </task>
     <task id="LOCAL-00001" summary="create class">
       <option name="closed" value="true" />
@@ -257,7 +261,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703102262079</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="travailler en commande">
+      <option name="closed" value="true" />
+      <created>1703259833118</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1703259833118</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +292,7 @@
     <MESSAGE value="complete produit rest just update et debut pour class client" />
     <MESSAGE value="complete CRUD produit" />
     <MESSAGE value="travailler en client CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="travailler en client CRUD" />
+    <MESSAGE value="travailler en commande" />
+    <option name="LAST_COMMIT_MESSAGE" value="travailler en commande" />
   </component>
 </project>

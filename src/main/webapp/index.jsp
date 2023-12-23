@@ -16,12 +16,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <style>
+
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-dark .navbar-brand {
+            color: #ffffff;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="header.jsp"%>
 <div class="container mt-3">
-    <h2>Bienvenue <%= login %></h2>
-    <!-- Content of your home page goes here -->
+    <h2>Bienvenue Hamza Benmoussa</h2>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

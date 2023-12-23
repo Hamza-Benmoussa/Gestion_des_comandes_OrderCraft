@@ -22,15 +22,16 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-@WebServlet(name = "c", urlPatterns = {"*.com"})
+// CommServlet.java
+@WebServlet(name = "CommServlet", urlPatterns = {"*.comm"})
 public class CommServlet extends HttpServlet {
     private ICommandeDao commandeDao;
     private IProduitDao produitDao;
     private IClientDao clientDao;
 
     @Override
-    public void init(ServletConfig config) {
+    public void init(ServletConfig config) throws ServletException {
+        // Initialize data access objects (DAOs)
         commandeDao = new CommandeImplDao();
         produitDao = new ProduitDaoImpl();
         clientDao = new ClientImplDao();
@@ -39,77 +40,65 @@ public class CommServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getServletPath();
-        System.out.println("hello");
-        if (path.equals("/index.com")) {
-            req.getRequestDispatcher("commande.jsp").forward(req, resp);
-        } else if (path.equals("/chercher.com")) {
-            // Code to handle search after form submission
-            String motCle = req.getParameter("motCle");
+
+        if (path.equals("/index.comm")) {
+            // Display the list of all commands
+            List<Commande> commandes = commandeDao.getAllCommande();
             CommandeModel model = new CommandeModel();
-            model.setMotCle(motCle);
-            // Fetch commands from the database based on the search criteria
-            List<Commande> commandes = commandeDao.clientCommande("%" + motCle + "%");
             model.setCommandes(commandes);
             req.setAttribute("model", model);
             req.getRequestDispatcher("commande.jsp").forward(req, resp);
-        } else if (path.equals("/saisie.com")) {
-            // Fetch all products for populating the dropdown in the command form
+        } else if (path.equals("/saisie.comm")) {
+            // Display the form to add a new command
             List<Produit> produits = produitDao.getAllProduits();
-            List<Client> clients = clientDao.getAllClient(); // Fetch all clients
+            List<Client> clients = clientDao.getAllClient();
             req.setAttribute("produits", produits);
-            req.setAttribute("clients", clients); // Set the attribute name to "clients"
-            System.out.println(clients);
+            req.setAttribute("clients", clients);
             req.getRequestDispatcher("saisieComm.jsp").forward(req, resp);
-        } else if (path.equals("/addCommande.com") && (req.getMethod().equals("POST"))) {
-            int idClient = Integer.parseInt(req.getParameter("idClient")); // Utiliser "idClient" au lieu de "id"
-            String[] produitsArray = req.getParameterValues("produits");
+        } else if (path.equals("/addCommande.comm") && req.getMethod().equals("POST")) {
+            // Handle the case where the "id" parameter is null or empty
+            String idParameter = req.getParameter("id");
+            if (idParameter == null || idParameter.isEmpty()) {
+                int defaultClientId = 1; // Set a default value
+                String errorMessage = "Client ID is required.";
+                req.setAttribute("errorMessage", errorMessage);
+                req.getRequestDispatcher("saisieComm.jsp").forward(req, resp);
+                return; // Stop further processing as there is an error
+            }
 
-            // Fetch all products from the database
-            List<Produit> produits = produitDao.getAllProduits();
-            List<Integer> produitsIds = Arrays.stream(produitsArray)
+            int idClient = Integer.parseInt(idParameter);
+            String[] produitsArray = req.getParameterValues("produit");
+
+            // Get the real Produit objects based on the product IDs
+            List<Produit> produits = Arrays.stream(produitsArray)
                     .map(Integer::parseInt)
+                    .map(produitDao::getProduit)
                     .collect(Collectors.toList());
-            Status status = Status.EN_COURS;
 
-            // Create the command and associated products
-            Commande commande = new Commande(idClient, LocalDate.now(), produitsIds, status);
-            commande = commandeDao.addCommande(commande);
+            // Modify the code to get the selected status from the request
+            Status status = Status.fromString(req.getParameter("status"));
+            Commande commande = new Commande(idClient, LocalDate.now(), produits, status);
+            commande = commandeDao.addCommande(commande,req);
             req.setAttribute("commande", commande);
-            req.getRequestDispatcher("confirmationCmd.jsp").forward(req, resp);
-        } else if (path.equals("/delete.com")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            commandeDao.deleteCommande(id);
-            resp.sendRedirect("chercher.co?motCle=");
-        } else if (path.equals("/update.com")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            Commande commande = commandeDao.getCommande(id);
-            List<Produit> produits = produitDao.getAllProduits();
-            List<Client> clients = clientDao.getAllClient(); // Fetch all clients
-            req.setAttribute("commande", commande);
-            req.setAttribute("produits", produits);
-            req.setAttribute("clients", clients); // Set the attribute name to "clients"
-            req.getRequestDispatcher("editCommande.jsp").forward(req, resp);
-        } else if (path.equals("/updateCommande.com") && (req.getMethod().equals("POST"))) {
-            // Code to handle updating a command
-            int id = Integer.parseInt(req.getParameter("id"));
-            int idClient = Integer.parseInt(req.getParameter("idClient"));
-            String[] produitsArray = req.getParameterValues("produits");
-            List<Integer> produitsIds = Arrays.stream(produitsArray)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-            Status status = Status.valueOf(req.getParameter("status"));
+            resp.sendRedirect("confirmationCmd.jsp");
 
-            // Create the command and associated products
-            Commande commande = new Commande(idClient, LocalDate.now(), produitsIds, status);
-            commande.setIdCommande(id); // Set the existing command ID
-            commandeDao.updateCommande(commande);
-            req.setAttribute("commande", commande);
-            req.getRequestDispatcher("confirmationUpdateCmd.jsp").forward(req, resp);
+        } else if (path.equals("/delete.comm")) {
+            // Handle the case where the "id" parameter is null or empty
+            String idParameter = req.getParameter("id");
+            if (idParameter != null && !idParameter.isEmpty()) {
+                // Delete the command with the specified ID
+                int id = Integer.parseInt(idParameter);
+                commandeDao.deleteCommande(id);
+            }
+            // Redirect to the index page after deleting the command
+            resp.sendRedirect("index.comm");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Delegate the processing of the POST request to the doGet method
+
         doGet(req, resp);
     }
 }
