@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Gestion Commande</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 <body>
 <%@ include file="headerGestionCommande.jsp"%>

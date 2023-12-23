@@ -12,10 +12,6 @@ public interface ICommandeDao {
     List<Commande> clientCommande(String mc);
 
     Commande getCommande(int id);
-
-
-    void deleteCommande(int id);
-
     List<Commande> getAllCommande();
     void updateProductQuantities(List<Produit> produits, HttpServletRequest request) throws SQLException;
     int getQuantityFromUserInput(Produit produit, HttpServletRequest request);

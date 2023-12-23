@@ -1,11 +1,11 @@
-<%@ page import="web.CommandeModel" %>
+<%@ page import="model.CommandeModel" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
     <title>Liste des Commandes</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 <body>
 <%@ include file="headerGestionCommande.jsp"%>

@@ -3,10 +3,10 @@
 <html>
 <head>
     <title>Gestion Produits</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 <body>
-<%@ include file="headerGestionProduit.jsp"%>
+<%@ include file="../produit/headerGestionProduit.jsp"%>
 <div class="container mt-4">
     <div class="card">
         <div class="card-header">

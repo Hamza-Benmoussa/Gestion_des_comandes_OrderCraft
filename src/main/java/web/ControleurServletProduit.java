@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ProduitModel;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ControleurServletProduit extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getServletPath();
         if (path.equals("/index.do")) {
-            req.getRequestDispatcher("produit.jsp").forward(req, resp);
+            req.getRequestDispatcher("produit/produit.jsp").forward(req, resp);
         } else if (path.equals("/chercher.do")) {
             // Code to handle search after form submission
             String motCle = req.getParameter("motCle");
@@ -36,9 +37,9 @@ public class ControleurServletProduit extends HttpServlet {
             List<Produit> produits = metier.produitMotCle("%" + motCle + "%");
             model.setProduits(produits);
             req.setAttribute("model", model);
-            req.getRequestDispatcher("produit.jsp").forward(req, resp);
+            req.getRequestDispatcher("produit/produit.jsp").forward(req, resp);
         } else if (path.equals("/saisie.do")) {
-            req.getRequestDispatcher("saisieProduit.jsp").forward(req, resp);
+            req.getRequestDispatcher("produit/saisieProduit.jsp").forward(req, resp);
         } else if (path.equals("/addProduit.do") && (req.getMethod().equals("POST"))) {
             // Code to handle adding a new product
             String name = req.getParameter("name");
@@ -47,7 +48,7 @@ public class ControleurServletProduit extends HttpServlet {
             Produit p = metier.addProduit(new Produit(name, prix,quantite));
 
             req.setAttribute("produit", p);
-            req.getRequestDispatcher("confirmationP.jsp").forward(req, resp);
+            req.getRequestDispatcher("produit/confirmationP.jsp").forward(req, resp);
         } else if (path.equals("/delete.do")) {
             int id = Integer.parseInt(req.getParameter("id"));
             metier.deleteProduit(id);
@@ -57,7 +58,7 @@ public class ControleurServletProduit extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("id"));
             Produit p = metier.getProduit(id);
             req.setAttribute("produit",p);
-            req.getRequestDispatcher("editProduit.jsp").forward(req,resp);
+            req.getRequestDispatcher("produit/editProduit.jsp").forward(req,resp);
         } else if (path.equals("/updateProduit.do") && (req.getMethod().equals("POST"))) {
             int id = Integer.parseInt(req.getParameter("id"));
             String name = req.getParameter("name");
@@ -67,7 +68,7 @@ public class ControleurServletProduit extends HttpServlet {
             p.setId(id);
             metier.updateProduit(p);
             req.setAttribute("produit", p);
-            req.getRequestDispatcher("confirmationUpdateP.jsp").forward(req, resp);
+            req.getRequestDispatcher("produit/confirmationUpdateP.jsp").forward(req, resp);
         }
 
     }

@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Gestion Produits</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 <body>
-<%@ include file="headerGestionProduit.jsp"%>
+<%@ include file="headerGestionClient.jsp"%>
 <div class="container mt-3">
-    <h2>Produit update avec succes</h2>
+    <h2>Client update avec succes</h2>
 </div>
 </body>
 </html>

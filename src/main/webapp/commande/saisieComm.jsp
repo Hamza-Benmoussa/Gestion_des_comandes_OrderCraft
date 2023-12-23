@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Gestion Commandes</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
     <style>
         #quantity-error {
             color: red;

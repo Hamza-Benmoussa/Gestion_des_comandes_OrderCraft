@@ -35,6 +35,9 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -89,9 +92,11 @@
       <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\commande" />
+      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\produit" />
+      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\client" />
       <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp" />
       <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\WEB-INF" />
-      <recent name="C:\Users\hamza\Desktop\Gestion_des_comandes_OrderCraft\src\main\webapp\produit" />
     </key>
   </component>
   <component name="RunManager">
@@ -211,7 +216,7 @@
       <workItem from="1703275852412" duration="5197000" />
       <workItem from="1703281399192" duration="4162000" />
       <workItem from="1703318623150" duration="4831000" />
-      <workItem from="1703323541001" duration="9072000" />
+      <workItem from="1703323541001" duration="12543000" />
     </task>
     <task id="LOCAL-00001" summary="create class">
       <option name="closed" value="true" />
@@ -269,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703259833118</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="la version final de l'app">
+      <option name="closed" value="true" />
+      <created>1703333150866</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1703333150866</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,6 +306,8 @@
     <MESSAGE value="complete CRUD produit" />
     <MESSAGE value="travailler en client CRUD" />
     <MESSAGE value="travailler en commande" />
-    <option name="LAST_COMMIT_MESSAGE" value="travailler en commande" />
+    <MESSAGE value="la version final de l'app" />
+    <MESSAGE value="separe les package et ajouter le fichier readme pour la documentation de mon project" />
+    <option name="LAST_COMMIT_MESSAGE" value="separe les package et ajouter le fichier readme pour la documentation de mon project" />
   </component>
 </project>

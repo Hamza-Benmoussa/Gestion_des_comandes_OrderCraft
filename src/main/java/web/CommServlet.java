@@ -16,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.CommandeModel;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -47,14 +48,14 @@ public class CommServlet extends HttpServlet {
             CommandeModel model = new CommandeModel();
             model.setCommandes(commandes);
             req.setAttribute("model", model);
-            req.getRequestDispatcher("commande.jsp").forward(req, resp);
+            req.getRequestDispatcher("commande/commande.jsp").forward(req, resp);
         } else if (path.equals("/saisie.comm")) {
             // Display the form to add a new command
             List<Produit> produits = produitDao.getAllProduits();
             List<Client> clients = clientDao.getAllClient();
             req.setAttribute("produits", produits);
             req.setAttribute("clients", clients);
-            req.getRequestDispatcher("saisieComm.jsp").forward(req, resp);
+            req.getRequestDispatcher("commande/saisieComm.jsp").forward(req, resp);
         } else if (path.equals("/addCommande.comm") && req.getMethod().equals("POST")) {
             // Handle the case where the "id" parameter is null or empty
             String idParameter = req.getParameter("id");
@@ -62,7 +63,7 @@ public class CommServlet extends HttpServlet {
                 int defaultClientId = 1; // Set a default value
                 String errorMessage = "Client ID is required.";
                 req.setAttribute("errorMessage", errorMessage);
-                req.getRequestDispatcher("saisieComm.jsp").forward(req, resp);
+                req.getRequestDispatcher("commande/saisieComm.jsp").forward(req, resp);
                 return; // Stop further processing as there is an error
             }
 
@@ -80,18 +81,9 @@ public class CommServlet extends HttpServlet {
             Commande commande = new Commande(idClient, LocalDate.now(), produits, status);
             commande = commandeDao.addCommande(commande,req);
             req.setAttribute("commande", commande);
-            resp.sendRedirect("confirmationCmd.jsp");
+            resp.sendRedirect("commande/confirmationCmd.jsp");
 
-        } else if (path.equals("/delete.comm")) {
-            // Handle the case where the "id" parameter is null or empty
-            String idParameter = req.getParameter("id");
-            if (idParameter != null && !idParameter.isEmpty()) {
-                // Delete the command with the specified ID
-                int id = Integer.parseInt(idParameter);
-                commandeDao.deleteCommande(id);
-            }
-            // Redirect to the index page after deleting the command
-            resp.sendRedirect("index.comm");
+
         }
     }
 

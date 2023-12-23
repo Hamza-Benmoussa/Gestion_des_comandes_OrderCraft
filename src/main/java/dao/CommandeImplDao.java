@@ -56,8 +56,9 @@ public class CommandeImplDao implements ICommandeDao {
                     ps2.addBatch();
 
                 }
-                // Execute batch insert
-                ps2.executeBatch();
+//En résumé, ps2.executeBatch(); est utilisé pour exécuter le lot d'instructions SQL préparées
+// pour l'insertion simultanée de plusieurs enregistrements dans la table commande_produit.
+ps2.executeBatch();
             }
 
 
@@ -160,16 +161,7 @@ public class CommandeImplDao implements ICommandeDao {
         return command;
     }
 
-    @Override
-    public void deleteCommande(int id) {
-        Connection connection = DbConnector.getConnection();
-        try (PreparedStatement ps = connection.prepareStatement("DELETE FROM commande WHERE commandeId = ?")) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la suppression de la commande.", e);
-        }
-    }
+
 
     @Override
     public List<Commande> getAllCommande() {

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Gestion Produits</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 <body>
 <%@ include file="headerGestionClient.jsp"%>

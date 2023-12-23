@@ -1,4 +1,4 @@
-package web;
+package model;
 
 import entite.Produit;
 
