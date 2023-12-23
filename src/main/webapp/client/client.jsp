@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Search Produit</title>
+    <title>Search Clients</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 <body>
@@ -12,7 +12,7 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Produits</h5>
+            <h5 class="card-title">Clients</h5>
         </div>
         <div class="card-body">
             <form action="chercher.client" method="get">
