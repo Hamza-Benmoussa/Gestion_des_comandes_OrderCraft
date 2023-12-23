@@ -61,7 +61,83 @@ L'application utilise une connexion à la base de données gérée par la classe
 2. Configurer la connexion à la base de données dans `DbConnector.java`.
 3. Déployer l'application sur un serveur compatible Jakarta EE (Tomcat).
 4. Utiliser la commande git.
+## L'interface de l'app
+*Login de l'app
 
-## Licence
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/4b33f997-6af1-49c6-ac40-92b2e8f580b9)
 
-Ce projet est sous licence [MIT License](LICENSE).
+*si login et incorrect
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/beb78e49-a42b-4abc-84cd-919140000b27)
+
+*home page
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/ea6b557f-7768-4a70-94bd-8a0065c5473f)
+
+*afficher de client
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/1a684bb8-39a7-41cd-97ad-eddde834b7fd)
+
+*ajouter client
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/f69fa320-276e-4783-a1a7-f32be5a7b885)
+
+*succes de l'ajoute
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/66c92b45-4819-40f9-a2d2-de9c6573c7e1)
+
+*le client ajouter avec succes et afficher 
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/ba3caadd-043e-4a6a-8509-89be77e13afb)
+
+*chercher avec motCle
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/da228b98-010a-4500-8315-9296cf2ccc81)
+
+*mettre a jour le client
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/d3943c54-e5bb-49d5-9d6c-5b1ff060cfce)
+
+*suppresion de le client 
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/4e9b23e2-c2cf-4403-ae32-dcdd2b206256)
+
+*produit comme le client CRUD
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/e132a4c7-d221-4cc6-8a58-105370eec9dd)
+
+*affichage de la commande
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/a182bbc9-3c5b-4035-a292-69a6d0329bdc)
+
+*ajouter un commande selectioner l'email de client 
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/9898535d-d283-452e-a157-6b03cf5d25ec)
+
+*ajouter un commande selectioner le produit
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/2d07c412-5769-416b-939e-aeb9071bf122)
+
+*si tu depasser la quantite existe 
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/10cc773b-0ecf-4b04-90e7-77efb708eb84)
+
+*le msg de l'ajoute de commande avec succes
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/1a94f55d-f82e-471a-a8be-344c9472957e)
+
+*voila ajouter avec succes et afficher en list de commande
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/03a9f126-62e0-4f69-b72a-5657357b740b)
+
+*si vous click logout vous aves perdu la session et allez vers la page login
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/89ad2ae1-4921-4656-9852-67c12368dd26)
+
+
+
+
+
+
+
+
