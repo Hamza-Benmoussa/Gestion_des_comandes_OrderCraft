@@ -20,12 +20,12 @@
         <div class="card-body">
             <form action="addCommande.comm" method="post">
                 <div class="form-group">
-                    <label>ID du Client :</label>
+                    <label>Email Client :</label>
                     <!-- Client Dropdown -->
                     <select class="form-control" id="id" name="id" required>
                         <option value="">Sélectionnez un client</option>
                         <c:forEach items="${clients}" var="client">
-                            <option value="${client.id}">${client.name}</option>
+                            <option value="${client.id}">${client.email}</option>
                         </c:forEach>
                     </select>
                 </div>
