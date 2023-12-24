@@ -69,7 +69,7 @@ L'application utilise une connexion à la base de données gérée par la classe
 
 *-Class : 
 
-![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/680c36fb-fc10-44d9-b33e-5a9435dde926)
+![class diagram](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/e6e71ce8-2b9c-4ef4-8df1-45279055e4e2)
 
 
 ## L'interface de l'app
