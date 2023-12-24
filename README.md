@@ -64,7 +64,12 @@ L'application utilise une connexion à la base de données gérée par la classe
 
 ## UML Diagramme 
 *-Use case :
+
 ![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/b22bd21b-437e-4ee2-93dc-bb59a566b723)
+
+*-Class : 
+
+![image](https://github.com/HAMZA0707/Gestion_des_comandes_OrderCraft/assets/89112359/680c36fb-fc10-44d9-b33e-5a9435dde926)
 
 
 ## L'interface de l'app
