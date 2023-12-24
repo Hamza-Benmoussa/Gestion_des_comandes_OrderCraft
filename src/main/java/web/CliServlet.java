@@ -10,12 +10,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ClientModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "csc", urlPatterns = {"*.client"})
 public class CliServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(CliServlet.class);
     private IClientDao clientDao;
 
     @Override
@@ -44,8 +47,8 @@ public class CliServlet extends HttpServlet {
             // Code to handle adding a new client
             String name = req.getParameter("name");
             String email = req.getParameter("email");
-            String address=req.getParameter("adress");
-            Client client = clientDao.addClient(new Client(name, email,address));
+            String address = req.getParameter("address");
+            Client client = clientDao.addClient(new Client(name, email, address));
             req.setAttribute("client", client);
             req.getRequestDispatcher("client/confirmationC.jsp").forward(req, resp);
         } else if (path.equals("/delete.client")) {
@@ -61,13 +64,16 @@ public class CliServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("id"));
             String name = req.getParameter("name");
             String email = req.getParameter("email");
-            String address=req.getParameter("address");
+            String address = req.getParameter("address");
             Client client = new Client(name, email, address);
             client.setId(id);
             clientDao.updateClient(client);
             req.setAttribute("client", client);
             req.getRequestDispatcher("client/confirmationUpdateC.jsp").forward(req, resp);
         }
+
+        // Log messages without values
+        logger.info("Log message for path: {}", path);
     }
 
     @Override
